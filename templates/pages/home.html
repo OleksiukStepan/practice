@@ -14,16 +14,16 @@
       <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
         <div>
           <strong>{{ task.content }}</strong>
-          <span class="{% if task.is_done %}text-success{% else %}text-danger{% endif %}">
+          <strong class="{% if task.is_done %}text-success{% else %}text-danger{% endif %}">
                     {% if task.is_done %}Done{% else %}Not done{% endif %}
-                </span>
+                </strong>
           <br>
           <small>Created: {{ task.created_at}}</small>
           {% if task.deadline %}
             <small class="text-danger">Deadline: {{ task.deadline }}</small>
           {% endif %}
           <br>
-          <small>Tags:
+          <small class="text-muted">Tags:
             {% for tag in task.tags.all %}
               {{ tag.name }}{% if not forloop.last %}, {% endif %}
             {% empty %}
