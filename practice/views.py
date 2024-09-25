@@ -16,7 +16,7 @@ def index(request):
 class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
-    template_name = "pages/task_create.html"
+    template_name = "pages/task_form.html"
     context_object_name = "tasks"
     ordering = ["is_done", "-created_at"]
     success_url = reverse_lazy("practice:home")
@@ -25,6 +25,8 @@ class TaskCreateView(CreateView):
 class TaskUpdateView(UpdateView):
     model = Task
     form_class = TaskForm
+    template_name = "pages/task_form.html"
+
 
 
 
