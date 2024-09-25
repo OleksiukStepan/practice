@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, UpdateView, CreateView
+from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from practice.forms import TaskForm
 from practice.models import Task
@@ -26,6 +26,14 @@ class TaskUpdateView(UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "pages/task_form.html"
+    success_url = reverse_lazy("practice:home")
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = "pages/task_confirm_delete.html"
+    success_url = reverse_lazy("practice:home")
+
 
 
 
