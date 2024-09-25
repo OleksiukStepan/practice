@@ -2,7 +2,7 @@
 {% load crispy_forms_filters %}
 
 {% block title %}
-  <title>Create Tag</title>
+  <title>{{ object|yesno:"Update,Create" }} Tag</title>
 {% endblock %}
 
 {% block content %}
