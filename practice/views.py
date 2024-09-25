@@ -11,6 +11,7 @@ class TaskListView(ListView):
     context_object_name = "tasks"
     template_name = "pages/home.html"
     ordering = ["is_done", "-created_at"]
+    paginate_by = 3
 
     def post(self, request, *args, **kwargs):
         task_id = request.POST.get("task_id")
@@ -56,7 +57,8 @@ class TagListView(ListView):
     model = Tag
     template_name = "pages/tag_list.html"
     context_object_name = "tags"
-
+    paginate_by = 5
+    
 
 class TagCreateView(CreateView):
     model = Tag
