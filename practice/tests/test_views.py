@@ -27,8 +27,7 @@ class TaskListViewTest(TestCase):
 
     def test_task_undo(self):
         response = self.client.post(
-            reverse("practice:home"),
-            {"task_id": self.task2.id, "Undo": ""}
+            reverse("practice:home"), {"task_id": self.task2.id, "Undo": ""}
         )
         self.task2.refresh_from_db()
         self.assertFalse(self.task2.is_done)
@@ -37,11 +36,14 @@ class TaskListViewTest(TestCase):
 
 class TaskCreateViewTest(TestCase):
     def test_create_task(self):
-        response = self.client.post(reverse("practice:task_create"), {
-            "content": "New Task",
-            "created_at": timezone.now(),
-            "is_done": False,
-        })
+        response = self.client.post(
+            reverse("practice:task_create"),
+            {
+                "content": "New Task",
+                "created_at": timezone.now(),
+                "is_done": False,
+            },
+        )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Task.objects.filter(content="New Task").exists())
 
@@ -56,7 +58,7 @@ class TaskUpdateViewTest(TestCase):
             {
                 "content": "Updated Task",
                 "is_done": True,
-            }
+            },
         )
         self.assertEqual(response.status_code, 302)
         self.task.refresh_from_db()
@@ -92,8 +94,7 @@ class TagListViewTest(TestCase):
 class TagCreateViewTest(TestCase):
     def test_create_tag(self):
         response = self.client.post(
-            reverse("practice:tag_create"),
-            {"name": "New Tag"}
+            reverse("practice:tag_create"), {"name": "New Tag"}
         )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Tag.objects.filter(name="New Tag").exists())
@@ -105,7 +106,10 @@ class TagUpdateViewTest(TestCase):
 
     def test_update_tag(self):
         response = self.client.post(
-            reverse("practice:tag_update", args=[self.tag.id]),
+            reverse(
+                "practice:tag_update",
+                args=[self.tag.id]
+            ),
             {"name": "Updated Tag"}
         )
         self.assertEqual(response.status_code, 302)

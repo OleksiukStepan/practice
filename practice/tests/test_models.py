@@ -22,8 +22,6 @@ class TagModelTest(TestCase):
 class TaskModelTest(TestCase):
     def setUp(self):
         self.tag = Tag.objects.create(name="Home")
-
-        # Create a sample task
         self.task = Task.objects.create(
             content="Test Task",
             created_at=timezone.now(),
