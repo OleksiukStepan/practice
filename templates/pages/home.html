@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %} Home {% endblock %}
+{% block title %}<title>Home</title> {% endblock %}
 
 {% block content %}
-<div>
+<div  class="d-flex justify-content-between align-items-center mt-3 mb-4">
   <h1>TODO List</h1>
+  <a href="{% url 'practice:task_create' %}" class="btn btn-primary">Add Task</a>
 </div>
-  
+
 <ul>
   {% for task in tasks %}
     <li class="list-group-item">
@@ -24,17 +25,19 @@
           <br>
           <small>Tags:
             {% for tag in task.tags.all %}
-              {{ tag.name }}
+              {{ tag.name }}{% if not forloop.last %}, {% endif %}
             {% empty %}
               No tags
             {% endfor %}
           </small>
           <br>
+          <a href="{% url 'practice:task_update' task.id %}" class="btn btn-primary">Update</a>
+          <a href="{% url 'practice:task_delete' task.id %}" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </li>
   {% empty %}
-    <li class="list-group-item">No tasks available</li>
+    <li class="list-group-item">No tasks available.</li>
   {% endfor %}
 </ul>
 {% endblock %}
