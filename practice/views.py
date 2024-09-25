@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
-from practice.forms import TaskForm
+from practice.forms import TaskForm, TagForm
 from practice.models import Task, Tag
 
 
@@ -50,6 +50,15 @@ class TagListView(ListView):
     model = Tag
     template_name = "pages/tag_list.html"
     context_object_name = "tags"
+
+
+class TagCreateView(CreateView):
+    model = Tag
+    form_class = TagForm
+    template_name = "pages/tag_form.html"
+    success_url = reverse_lazy("practice:tag_list")
+
+
 
 
 
