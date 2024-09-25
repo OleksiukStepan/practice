@@ -58,7 +58,7 @@ class TagListView(ListView):
     template_name = "pages/tag_list.html"
     context_object_name = "tags"
     paginate_by = 5
-    
+
 
 class TagCreateView(CreateView):
     model = Tag
