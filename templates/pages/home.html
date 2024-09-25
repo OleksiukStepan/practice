@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<div>
+  <h1>TODO List</h1>
+</div>
+  
+<ul>
+  {% for task in tasks %}
+    <li class="list-group-item">
+      <div>
+        <div>
+          <strong>{{ task.content }}</strong>
+          <span class="{% if task.is_done %}text-success{% else %}text-danger{% endif %}">
+                    {% if task.is_done %}Done{% else %}Not done{% endif %}
+                </span>
+          <br>
+          <small>Created: {{ task.created_at}}</small>
+          {% if task.deadline %}
+            <small class="text-danger">Deadline: {{ task.deadline }}</small>
+          {% endif %}
+          <br>
+          <small>Tags:
+            {% for tag in task.tags.all %}
+              {{ tag.name }}
+            {% empty %}
+              No tags
+            {% endfor %}
+          </small>
+          <br>
+        </div>
+      </div>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No tasks available</li>
+  {% endfor %}
+</ul>
+{% endblock %}
