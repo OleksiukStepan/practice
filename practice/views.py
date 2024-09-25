@@ -59,6 +59,12 @@ class TagCreateView(CreateView):
     success_url = reverse_lazy("practice:tag_list")
 
 
+class TagUpdateView(UpdateView):
+    model = Tag
+    form_class = TagForm
+    template_name = "pages/tag_form.html"
+    success_url = reverse_lazy("practice:tag_list")
+
 
 
 
