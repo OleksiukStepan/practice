@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView
 
+from practice.forms import TaskForm
 from practice.models import Task
 
 
@@ -11,9 +13,12 @@ def index(request):
     )
 
 
-class TaskList(ListView):
+class TaskCreateView(ListView):
     model = Task
-    template_name = "pages/task_list.html"
+    form_class = TaskForm
+    template_name = "pages/task_create.html"
     context_object_name = "tasks"
     ordering = ["is_done", "-created_at"]
+    success_url = reverse_lazy("practice:home")
+
 

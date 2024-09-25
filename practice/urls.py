@@ -4,14 +4,14 @@ from django.urls import path
 
 from practice.views import (
     index,
-    TaskList,
-    # TaskCreate,
+    TaskCreateView,
+    # TagsListView,
 )
 
 urlpatterns = [
     path("", index, name="home"),
-    path("tasks/", TaskList.as_view(), name="task_list"),
-    # path("tasks/create", TaskCreate.as_view(), name="task_create"),
+    path("tasks/create/", TaskCreateView.as_view(), name="task_create"),
+    # path("tags/", TagsListView.as_view(), name="tag_list"),
 ]
 
 app_name = "practice"
