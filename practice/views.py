@@ -42,8 +42,14 @@ class TaskUpdateView(UpdateView):
 
 class TaskDeleteView(DeleteView):
     model = Task
-    template_name = "pages/task_confirm_delete.html"
+    template_name = "pages/confirm_delete.html"
     success_url = reverse_lazy("practice:home")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["name"] = "Task"
+        context["success_url"] = self.success_url
+        return context
 
 
 class TagListView(ListView):
@@ -66,6 +72,13 @@ class TagUpdateView(UpdateView):
     success_url = reverse_lazy("practice:tag_list")
 
 
+class TagDeleteView(DeleteView):
+    model = Tag
+    template_name = "pages/confirm_delete.html"
+    success_url = reverse_lazy("practice:tag_list")
 
-
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["name"] = "Tag"
+        context["success_url"] = self.success_url
+        return context
