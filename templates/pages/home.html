@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Home</title> {% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mt-3 mb-4">
+  <h1>TODO List</h1>
+  <a href="{% url 'practice:task_create' %}" class="btn btn-primary">Add Task</a>
+</div>
+
+<ul>
+  {% for task in tasks %}
+    <li class="list-group-item">
+      <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
+        <div>
+          <strong>{{ task.content }}</strong>
+          <strong class="{% if task.is_done %}text-success{% else %}text-danger{% endif %}">
+                    {% if task.is_done %}Done{% else %}Not done{% endif %}
+                </strong>
+          <br>
+          <small>Created: {{ task.created_at}}</small>
+          {% if task.deadline %}
+            <small class="text-danger">Deadline: {{ task.deadline }}</small>
+          {% endif %}
+          <br>
+          <small class="text-muted">Tags:
+            {% for tag in task.tags.all %}
+              {{ tag.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+              No tags
+            {% endfor %}
+          </small>
+          <br>
+          <a href="{% url 'practice:task_update' task.id %}" class="btn btn-warning">Update</a>
+          <a href="{% url 'practice:task_delete' task.id %}" class="btn btn-danger">Delete</a>
+        </div>
+        <div>
+          <form action="" method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="task_id" value="{{ task.id }}">
+            {% if task.is_done %}
+              <button type="submit" name="Undo" class="btn btn-secondary">Undo</button>
+            {% else %}
+              <button type="submit" name="Complete" class="btn btn-success">Complete</button>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No tasks available.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
