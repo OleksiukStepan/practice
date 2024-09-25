@@ -22,7 +22,7 @@
         <tr>
           <td>{{ tag.name }}</td>
           <td><a href="{% url 'practice:tag_update' tag.id %}" class="btn btn-warning">Update</a></td>
-          <td><a href="#" class="btn btn-danger">Delete</a></td>
+          <td><a href="{% url 'practice:tag_delete' tag.id %}" class="btn btn-danger">Delete</a></td>
         </tr>
       {% empty %}
         <tr>
