@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from practice.forms import TaskForm
-from practice.models import Task
+from practice.models import Task, Tag
 
 
 class TaskListView(ListView):
@@ -46,6 +46,10 @@ class TaskDeleteView(DeleteView):
     success_url = reverse_lazy("practice:home")
 
 
+class TagListView(ListView):
+    model = Tag
+    template_name = "pages/tag_list.html"
+    context_object_name = "tags"
 
 
 
